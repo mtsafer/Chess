@@ -3,6 +3,8 @@ class Token
 	def initialize( position, history = [] ) # position is [x,y]
 		@position = position
 		@history = history + [ position ]
+		@ally = "white"
+		@enemy = "black"
 	end
 
 	def x
