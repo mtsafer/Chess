@@ -4,10 +4,10 @@ class Board
 
 	def initialize
 		@no_token = Token.new([-1,-1])
-		@spots = {}
+		@spots = []
 		for i in 0..7
 			for j in 0..7
-				@spots[[i,j]] = @no_token
+				@spots << [[j,i], @no_token]
 			end
 		end
 	end
@@ -19,14 +19,14 @@ class Board
 
 	def at_position position #position should be [x,y]
 		found = @no_token
-		@spots.each { |spot, token| found = token if spot == position }
+		@spots.each { |spot| found = spot[1] if spot[0] == position }
 		found
 	end
 
 	def view
-		spots.each do |spot, token|
-			puts "" if spot[0] == 0
-			print token.img
+		spots.each do |spot|
+			puts "" if spot[0][0] == 0
+			print spot[1].img
 		end
 	end
 

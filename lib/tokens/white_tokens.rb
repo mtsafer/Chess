@@ -8,7 +8,7 @@ class WhiteKnight < Knight
 		@ally = "white"
 		@enemy = "black"
 		@allegiance = "white"
-		@img = "/u265e"
+		@img = "\u265e"
 	end
 end
 
