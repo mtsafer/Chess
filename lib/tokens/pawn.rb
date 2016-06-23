@@ -16,6 +16,7 @@ class Pawn < Token
 		if board.at_position([ x - 1, y + 1 ]).allegiance == @enemy
 			moves += [ [ x - 1, y + 1 ] ] 
 		end
+		moves
 	end
 
 	#moves the token to the given spot if it is a legal move.
