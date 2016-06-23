@@ -14,7 +14,7 @@ class Pawn < Token
 			moves += [ [ x + 1, y + 1 ] ]
 		end
 		if board.at_position([ x - 1, y + 1 ]).allegiance == @enemy
-			moves += [ [ x + 1, y + 1 ] ] 
+			moves += [ [ x - 1, y + 1 ] ] 
 		end
 	end
 
