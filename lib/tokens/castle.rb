@@ -8,6 +8,6 @@ class Castle < Token
 			moves << [ x, i ]
 			moves << [ i, y ]
 		end
-		moves
+		moves.select { |move| board.on_board? move }
 	end
 end

@@ -19,10 +19,8 @@ class Pawn < Token
 		moves
 	end
 
-	#moves the token to the given spot if it is a legal move.
-	#returns false if it an illegal move
-	def move( move_to, board ) #the state of the board is passed
-		super ? @first_turn = false : super #set first turn to false
+	def move( move_to, board )
+		super ? @first_turn = false : @first_turn = true
 	end
 
 end

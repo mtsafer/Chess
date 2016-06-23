@@ -10,7 +10,7 @@ class Bishop < Token
 			moves << [ x - i, y + i ]
 			moves << [ x - i, y - i ]
 		end
-		moves
+		moves.select { |move| board.on_board? move }
 	end
 
 end

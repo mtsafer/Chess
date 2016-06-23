@@ -11,6 +11,6 @@ class Queen < Token
 			moves << [ x - i, y + i ]
 			moves << [ x - i, y - i ] #bishop moves
 		end
-		moves
+		moves.select { |move| board.on_board? move }
 	end
 end

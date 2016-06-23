@@ -24,10 +24,15 @@ class Board
 	end
 
 	def view
-		spots.each do |spot|
-			puts "" if spot[0][0] == 0
-			print spot[1].img
+		(0..@spots.length/8).reverse_each do |i|
+			line = @spots[i*8...(i+1)*8]
+			line.each { |spot| print spot[1].img}
+			puts ""
 		end
+		#spots.each do |spot|
+	#		puts "" if spot[0][0] == 0
+	#		print spot[1].img
+	#	end
 	end
 
 end
