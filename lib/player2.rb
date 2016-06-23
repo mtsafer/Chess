@@ -9,7 +9,7 @@ class Player2
 		@castles = [ WhiteCastle.new([ 0, 7 ]), WhiteCastle.new([ 7, 7 ]) ]
 		@bishops = [ WhiteBishop.new([ 2, 7 ]), WhiteBishop.new([ 5, 7 ]) ]
 		@queens =  [  WhiteQueen.new([ 3, 7 ]) ]
-		@kings =   [   BlackKing.new([ 4, 7 ]) ]
+		@kings =   [   WhiteKing.new([ 4, 7 ]) ]
 		@tokens = [@pawns, @knights, @castles, @bishops, @queens, @kings]
 	end
 end
