@@ -1,22 +1,24 @@
 require_relative "knight"
 require_relative "pawn"
 
-class BlackKnight < Knight
-	attr_reader :ally, :enemy, :allegiance
-	def initialize
+class WhiteKnight < Knight
+	attr_reader :ally, :enemy, :allegiance, :img
+	def initialize( position, history = [] )
 		super
 		@ally = "white"
 		@enemy = "black"
-		@allegiance = "white" #not strictly necessary but adds readability
+		@allegiance = "white"
+		@img = "/u265e"
 	end
 end
 
-class BlackPawn < Pawn
-	attr_reader :ally, :enemy, :allegiance
-	def initialize
+class WhitePawn < Pawn
+	attr_reader :ally, :enemy, :allegiance, :img
+	def initialize( position, history = [] )
 		super
 		@ally = "white"
 		@enemy = "black"
-		@allegiance = "white" #not strictly necessary but adds readability
+		@allegiance = "white"
+		@img = "\u265f"
 	end
 end

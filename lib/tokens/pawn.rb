@@ -1,7 +1,7 @@
 require_relative "token"
 
 class Pawn < Token
-	def initialize
+	def initialize( position, history = [] )
 		super
 		@first_turn = true
 	end

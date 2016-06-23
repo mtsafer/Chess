@@ -2,20 +2,24 @@ require_relative "knight"
 require_relative "pawn"
 
 class BlackKnight < Knight
-	def initialize
+	attr_reader :ally, :enemy, :allegiance, :img
+	def initialize( position, history = [] )
 		super
 		@ally = "black"
 		@enemy = "white"
 		@allegiance = "black"
+		@img = "\u2658"
 	end
 end
 
 class BlackPawn < Pawn
-	def initialize
+	attr_reader :ally, :enemy, :allegiance, :img
+	def initialize( position, history = [] )
 		super
 		@ally = "black"
 		@enemy = "white"
 		@allegiance = "black"
+		@img = "\u2659"
 	end
 	def next_moves board #the state of the board is passed
 		moves = [ [ x, y - 1 ] ]

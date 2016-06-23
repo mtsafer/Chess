@@ -1,10 +1,15 @@
-require_relative "player1"
-require_relative "player2"
-
 class Board
 
+	attr_accessor :spots
+
 	def initialize
-		@no_token = Token.new(-1,-1)
+		@no_token = Token.new([-1,-1])
+		@spots = {}
+		for i in 0..7
+			for j in 0..7
+				@spots[[i,j]] = @no_token
+			end
+		end
 	end
 
 	#return true if the position is one the board, false otherwise
@@ -14,13 +19,15 @@ class Board
 
 	def at_position position #position should be [x,y]
 		found = @no_token
-		player1.tokens.each do |token|
-			token.each { |piece| found = piece if piece.position == position }
-		end
-		player2.tokens.each do |token|
-			token.each { |piece| found = piece if piece.position == position }
-		end
+		@spots.each { |spot, token| found = token if spot == position }
 		found
+	end
+
+	def view
+		spots.each do |spot, token|
+			puts "" if spot[0] == 0
+			print token.img
+		end
 	end
 
 end
