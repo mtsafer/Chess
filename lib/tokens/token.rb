@@ -1,10 +1,11 @@
 class Token
-	attr_reader :history, :position
+	attr_reader :history, :position, :allegiance
 	def initialize( position, history = [] ) # position is [x,y]
 		@position = position
 		@history = history + [ position ]
 		@ally = "white"
 		@enemy = "black"
+		@allegiance = "neutral"
 	end
 
 	def x
