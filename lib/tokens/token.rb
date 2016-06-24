@@ -21,18 +21,31 @@ class Token
 	#returns false if it an illegal move
 	def move( move_to, board ) #the state of the board is passed
 		moves = next_moves(board)
-		if(	  board.on_board?(move_to) && #check that the move is on the board
-		  	( moves.include?(move_to)) && #check that it's a real move
-		  	( move_to != position) && #can't move to the same spot
-				( board.at_position(move_to).allegiance != @ally)) #can't move onto ally 
-			if( !self.is_a?(Knight) && path_blocked?(move_to,board)) #something in the way
-				puts "There is something blocking the way!"
-				return false
+		if(	board.on_board?(move_to) ) #check that the move is on the board
+		  if( moves.include?(move_to) ) #check that it's a real move
+			  if( move_to != position ) #can't move to the same spot
+					if( board.at_position(move_to).allegiance != @ally ) #can't move onto ally 
+						if( !self.is_a?(Knight) && path_blocked?(move_to,board) ) #something in the way
+							puts "There is something blocking the way!"
+							return false
+						else
+							@position = move_to #set the new position
+							return true
+						end
+					else
+						puts "Friendly fire is not activated!"
+						return false
+					end
+				else
+					puts "You have to actually MOVE the piece"
+					return false
+				end
 			else
-				@position = move_to #set the new position
-				return true
+				puts "That's not a valid move..."
+				return false
 			end
 		else
+			puts "You can't move off the board, yah cheater!"
 			return false #return false if move_to can't resolve
 		end
 	end
