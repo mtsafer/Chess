@@ -26,9 +26,10 @@ class Game
 						to[0] == token.position[0] &&
 						destination.enemy == player.allegiance)
 					puts "Pawns can't attack forward"
+					return false
 				elsif destination.allegiance != player.allegiance
 					destination.die
-					token.move( to, @board )
+					success = token.move( to, @board )
 				end
 			else
 				puts "you don't have permission!"
@@ -39,17 +40,23 @@ class Game
 			return false
 		end
 		update_board
+		success
 	end
 
 	def switch_turns
 		flip_board
 		update_board
-		if active == player1
-			active = player2
+		if @active.name == "Player1"
+			@active = @player2
 		else
-			active = player1
+			@active = @player1
 		end
-		active
+		@active
+	end
+
+	#returns the winner, if any. returns false otherwise
+	def winner
+		false
 	end
 
 	private

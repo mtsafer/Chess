@@ -1,8 +1,9 @@
 require_relative "tokens/white_tokens"
 
 class Player2
-	attr_reader :tokens, :allegiance
+	attr_reader :tokens, :allegiance, :name
 	def initialize
+		@name = "Player2"
 		@allegiance = "white"
 		@pawns = []
 		(0..7).each { |n| @pawns << WhitePawn.new([ n , 6 ]) }
