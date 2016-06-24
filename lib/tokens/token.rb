@@ -19,7 +19,8 @@ class Token
 
 	#moves the token to the given spot if it is a legal move.
 	#returns false if it an illegal move
-	def move( move_to, board ) #the state of the board is passed
+	def move( move_to, board, game ) #the state of the board is passed
+		save_pos = @position
 		moves = next_moves(board)
 		if(	board.on_board?(move_to) ) #check that the move is on the board
 		  if( moves.include?(move_to) ) #check that it's a real move
@@ -30,7 +31,17 @@ class Token
 							return false
 						else
 							@position = move_to #set the new position
-							return true
+							active = game.active
+							game.switch_turns
+							if(game.check(active))
+								game.switch_turns
+								@position = save_pos
+								puts "You can't move into check!"
+								return false
+							else
+								game.switch_turns
+								return true
+							end
 						end
 					else
 						puts "Friendly fire is not activated!"
@@ -57,16 +68,16 @@ class Token
 	def die
 		@position = [-1,-1]
 	end
-	private 
-		#returns true if the path is bocked
-		#returns false if the way is clear
-		def path_blocked?(to, board)
-			if to[0] == x || to[1] == y
-				check_straight(to, board)
-			else
-				check_diagonal(to, board)
-			end
+	#returns true if the path is bocked
+	#returns false if the way is clear
+	def path_blocked?(to, board)
+		if to[0] == x || to[1] == y
+			check_straight(to, board)
+		else
+			check_diagonal(to, board)
 		end
+	end
+	private 
 
 		#checks the spots between the current location and the destination
 		#using a straight path

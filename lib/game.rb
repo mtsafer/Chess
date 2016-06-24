@@ -28,8 +28,8 @@ class Game
 					puts "Pawns can't attack forward"
 					return false
 				elsif destination.allegiance != player.allegiance
-					destination.die
-					success = token.move( to, @board )
+					success = token.move( to, @board, self )
+					destination.die if success
 					update_board
 					return success
 				else
@@ -65,6 +65,41 @@ class Game
 		victor
 	end
 
+	#returns true if player is in check, false otherwise
+	def check player
+		in_check = false
+		enemy = player.name == "Player1" ? player2 : player1
+		enemy.tokens.each do |token|
+			token.each do |piece|
+				if( piece.next_moves(@board).include?(player.tokens[-1][0].position) &&
+					!piece.path_blocked?(player.tokens[-1][0].position, @board))
+					in_check = true
+				end
+			end
+		end
+		in_check
+	end
+
+	#update the board so that the board has matching locations
+	#with the tokens
+	def update_board
+		@board.spots.each do |spot|
+			spot[1] = @empty
+		end
+		@board.spots.map do |spot|
+			@player1.tokens.each do |pieces|
+				pieces.each do |piece| # should update board with token positions
+					spot[1] = piece if spot[0] == piece.position
+				end
+			end
+			@player2.tokens.each do |pieces|
+				pieces.each do |piece| # should update board with token positions
+					spot[1] = piece if spot[0] == piece.position
+				end
+			end
+		end
+	end
+
 	private
 		#each piece should have both coordinates subjected to the following formula
 		#(n-7)(-1). This should effectively flip the board around
@@ -77,26 +112,6 @@ class Game
 			@player2.tokens.each do |pieces|
 				pieces.each do |piece|
 					piece.flip #should mirror the piece on board
-				end
-			end
-		end
-
-		#update the board so that the board has matching locations
-		#with the tokens
-		def update_board
-			@board.spots.each do |spot|
-				spot[1] = @empty
-			end
-			@board.spots.map do |spot|
-				@player1.tokens.each do |pieces|
-					pieces.each do |piece| # should update board with token positions
-						spot[1] = piece if spot[0] == piece.position
-					end
-				end
-				@player2.tokens.each do |pieces|
-					pieces.each do |piece| # should update board with token positions
-						spot[1] = piece if spot[0] == piece.position
-					end
 				end
 			end
 		end

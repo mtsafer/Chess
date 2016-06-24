@@ -95,7 +95,7 @@ private
 		move << safe_input_to(game)
 		move
 	end
-
+	#load a game
 	load = load_game
 	load ? game = load : game = Game.new
 	puts "Type save at any point to save the game"
@@ -109,6 +109,9 @@ private
 			game.look #need to add check/checkmate to this method
 		else
 			puts "\nTry again!\n\n"
+		end
+		if game.check game.active
+			puts "You are in check!"
 		end
 	end
 
