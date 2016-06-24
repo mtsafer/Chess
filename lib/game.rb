@@ -59,7 +59,10 @@ class Game
 
 	#returns the winner, if any. returns false otherwise
 	def winner
-		false
+		victor = false
+		victor = "Player1" unless @board.on_board? player2.tokens[-1][0].position
+		victor = "Player2" unless @board.on_board? player1.tokens[-1][0].position
+		victor
 	end
 
 	private

@@ -3,9 +3,10 @@ require_relative "lib/game"
 private
 	
 	def safe_input_from game
-		print "#{game.active.name} select a piece to move (ex: b2): "
+		print "#{game.active.name} (#{game.active.allegiance}) " +\
+					 "select a piece to move (ex: b2): "
 		input = gets.chomp.downcase
-		if(input[0].between?("a","h") && input[1].to_i.between?(1,8))
+		if(input != "" && input[0].between?("a","h") && input[1].to_i.between?(1,8))
 			input = input.split("")
 			input[0] = input[0].ord - 97
 			input[1] = input[1].to_i - 1
@@ -17,9 +18,10 @@ private
 	end
 
 	def safe_input_to game
-		print "#{game.active.name} select a spot to move to (ex: b4): "
+		print "#{game.active.name} (#{game.active.allegiance}) " +\
+					 "select a piece to move (ex: b2): "
 		input = gets.chomp.downcase
-		if(input[0].between?("a","h") && input[1].to_i.between?(1,8))
+		if(input != "" && input[0].between?("a","h") && input[1].to_i.between?(1,8))
 			input = input.split("")
 			input[0] = input[0].ord - 97
 			input[1] = input[1].to_i - 1
@@ -50,3 +52,5 @@ private
 			puts "\nTry again!\n\n"
 		end
 	end
+
+	puts "The winner was #{game.winner}!"
