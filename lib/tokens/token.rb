@@ -30,9 +30,10 @@ class Token
 				return false
 			else
 				@position = move_to #set the new position
+				return true
 			end
 		else
-			false #return false if move_to can't resolve
+			return false #return false if move_to can't resolve
 		end
 	end
 

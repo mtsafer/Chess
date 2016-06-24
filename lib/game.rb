@@ -30,6 +30,11 @@ class Game
 				elsif destination.allegiance != player.allegiance
 					destination.die
 					success = token.move( to, @board )
+					update_board
+					return success
+				else
+					puts "you can't move onto your own piece, stupid!"
+					return false
 				end
 			else
 				puts "you don't have permission!"
@@ -39,8 +44,6 @@ class Game
 			puts "There is no piece there!"
 			return false
 		end
-		update_board
-		success
 	end
 
 	def switch_turns

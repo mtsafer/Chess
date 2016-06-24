@@ -20,7 +20,9 @@ class Pawn < Token
 	end
 
 	def move( move_to, board )
-		super ? @first_turn = false : @first_turn = true
+		success = super
+		success ? @first_turn = false : @first_turn = true
+		success
 	end
 
 end
